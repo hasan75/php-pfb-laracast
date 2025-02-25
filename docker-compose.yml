@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80" # Map port 8080 on your machine to port 80 inside the container
+    volumes:
+      - .:/var/www/html # Sync your local files with the container

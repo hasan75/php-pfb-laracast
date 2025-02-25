@@ -1,0 +1,23 @@
+# Ignore environment config files
+.env
+.env.local
+
+# Ignore logs and cache
+/logs/
+/cache/
+/debug.log
+
+# Ignore vendor dependencies (if using Composer)
+vendor/
+
+# Ignore compiled assets
+/public/build/
+/node_modules/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Ignore Docker-related files
+docker-compose.override.yml
