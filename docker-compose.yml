@@ -3,7 +3,28 @@ version: '3.8'
 services:
   php:
     build: .
+    container_name: php_for_beginners
+    restart: always
     ports:
       - "8080:80" # Map port 8080 on your machine to port 80 inside the container
     volumes:
       - .:/var/www/html # Sync your local files with the container
+    depends_on:
+      - mysql # Ensure MySQL starts before PHP
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: demo
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306" # Expose MySQL port for external connections
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data
+
+volumes:
+  mysql_data:
