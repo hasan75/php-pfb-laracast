@@ -10,19 +10,27 @@ require 'functions.php';
 //let's create a class
 
 class Database {
-    public function query() {
+
+    public $connection;
+
+    public function __construct() {
         $dsn = 'mysql:host=mysql;port=3306;dbname=demo;charset=utf8mb4';
 
-        $pdo = new PDO($dsn, 'root', 'root');
+        $this->connection = new PDO($dsn, 'root', 'root');
+    }
+    public function query($query) {
 
-        $statement = $pdo->prepare("SELECT * FROM Posts");
+        $statement = $this->connection->prepare($query);
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement;
     }
 }
 
-$posts = (new Database())->query();
-foreach ($posts as $post) {
-    echo '<li>'. $post['title'] . ' - by ' . $post['author'] .'</li>';
-}
+$posts = (new Database())->query("SELECT * FROM Posts where postId = 2")->fetchAll(PDO::FETCH_ASSOC);
+
+
+dd($posts['title']);
+//foreach ($posts as $post) {
+//    echo '<li>'. $post['title'] . ' - by ' . $post['author'] .'</li>';
+//}
 
