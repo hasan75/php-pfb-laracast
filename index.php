@@ -29,8 +29,7 @@ class Database {
 $posts = (new Database())->query("SELECT * FROM Posts where postId = 2")->fetchAll(PDO::FETCH_ASSOC);
 
 
-dd($posts['title']);
-//foreach ($posts as $post) {
-//    echo '<li>'. $post['title'] . ' - by ' . $post['author'] .'</li>';
-//}
+foreach ($posts as $post) {
+    echo '<li>'. $post['title'] . ' - by ' . $post['author'] .'</li>';
+}
 
